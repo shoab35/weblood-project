@@ -3,7 +3,11 @@
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Please Login</h1>
-      <form action="{% url 'user_login' %}" method="post">
+
+  </div>
+</div>
+    <div class="container-fluid">
+    <form action="{% url 'user_login' %}" method="post">
           {% csrf_token %}
   <div class="form-group">
     <label for="username">Username: </label>
@@ -15,7 +19,6 @@
   </div>
   <input type="submit" name="" value="Login">
 </form>
-  </div>
-</div>
+    </div>
 
 {% endblock %}

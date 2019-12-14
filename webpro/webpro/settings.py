@@ -133,4 +133,3 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL = 'webb/user_login'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

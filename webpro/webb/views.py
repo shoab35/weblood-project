@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import UserForm, UserProfileInfoForm
+from .models import UserProfileInfo
 #
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -22,6 +23,14 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+
+@login_required
+def user_profile(request):
+    return render(request, 'webb/userprofile.html')
+
+@login_required
+def edit_profile(request):
+    return render(request, 'webb/editprofile.html')
 
 def register(request):
     registered = False

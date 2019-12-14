@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "webb/base.html" %}
+{% block body_block %}
+    <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Your Profile</h1>
+
+  </div>
+    <div class="uprofile">
+        <img src="{{ user.userprofileinfo.profile_pic.url }}" class="rounded mx-auto d-block" alt="profile pic">
+        <table>
+            
+            <tr>
+                <td>
+                    <p>Username: {{ user.username }}</p></br>
+                    <p>Email: {{ user.email }}</p></br>
+                    <p>Age: {{ user.userprofileinfo.age }}</p></br>
+                    <p>Weight: {{ user.userprofileinfo.weight }}</p></br>
+                    <p>Blood Group: {{ user.userprofileinfo.blood_group }}</p></br>
+                    <p>Distict: {{ user.userprofileinfo.District }}</p></br>
+                    <p>Phone number: {{ user.userprofileinfo.phone_number }}</p>
+                </td>
+            </tr>
+        </table>
+        <a class="btn btn-primary" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+    </div>
+</div>
+
+{% endblock %}
