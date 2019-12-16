@@ -34,7 +34,7 @@ class UserProfileInfo(models.Model):
         ('Available', 'AVAILABLE'), ('Unavailable', 'UNAVAILABLE')
     ]
 
-    status = models.CharField(max_length=10, choices=stat, blank=False)
+    status = models.CharField(max_length=12, choices=stat, blank=False)
 
     First_name = models.CharField(max_length=15, blank=False)
 
