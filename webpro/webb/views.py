@@ -1,21 +1,18 @@
-from django.shortcuts import render
-from .forms import UserForm, UserProfileInfoForm
+from django.shortcuts import render, redirect
+from .forms import UserForm, UserProfileInfoForm, UserFormUpdate, UserProfileInfoFormUpdate
 from .models import UserProfileInfo
 #
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.db.models import Q
 
 
 # Create your views here.
 def index(request):
     return render(request, 'webb/index.html')
-
-
-@login_required
-def special(request):
-    return HttpResponse("You are logged in...")
 
 
 @login_required
@@ -28,9 +25,28 @@ def user_logout(request):
 def user_profile(request):
     return render(request, 'webb/userprofile.html')
 
+
 @login_required
 def edit_profile(request):
-    return render(request, 'webb/editprofile.html')
+    if request.method == 'POST':
+        user_update_form = UserFormUpdate(request.POST, instance=request.user)
+        profile_update_form = UserProfileInfoFormUpdate(request.POST,
+                                                        request.FILES,
+                                                        instance=request.user.userprofileinfo)
+        if user_update_form.is_valid() and profile_update_form.is_valid():
+            user_update_form.save()
+            profile_update_form.save()
+            return redirect('edit_profile')
+    else:
+        user_update_form = UserFormUpdate(instance=request.user)
+        profile_update_form = UserProfileInfoFormUpdate(instance=request.user.userprofileinfo)
+
+    context = {
+        'user_update_form': user_update_form,
+        'profile_update_form': profile_update_form
+    }
+    return render(request, 'webb/editprofile.html', context)
+
 
 def register(request):
     registered = False
@@ -86,3 +102,23 @@ def user_login(request):
 
     else:
         return render(request, 'webb/login.html', {})
+
+
+def search(request):
+    if request.method == 'POST':
+        srch = request.POST['srh']
+
+        if srch:
+            match = UserProfileInfo.objects.filter(Q(blood_group__icontains=srch) |
+                                                   Q(District__icontains=srch) |
+                                                   Q(First_name__icontains=srch) |
+                                                   Q(Last_name__icontains=srch)
+                                                   )
+            if match:
+                return render(request, 'webb/search.html', {'sr': match})
+            else:
+                return redirect('search')
+        else:
+            return HttpResponseRedirect(reverse('index'))
+
+    return render(request, 'webb/base.html')

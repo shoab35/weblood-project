@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "webb/base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block body_block %}
+<div class="container-fluid">
+    <form>
+        <h1>Donors:</h1><br>
+        {% if sr %}
+            {% for k in sr %}
+            <div class="row">
+                <div class="col-sm-12 col-md-6"><img src="{{ k.profile_pic.url }}" class="rounded mx-auto d-block col-sm-12 col-md-4 userProfilePic" alt="profile pic"></div>
+                <div class="col-sm-12 col-md-6">
+                    <table>
+                        <tr>
+                            <td>First Name: {{ k.First_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name: {{ k.Last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>District: {{ k.District }}</td>
+                        </tr>
+                        <tr>
+                            <td>Blood Type: {{ k.blood_group }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone: {{ k.phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email: {{ k.user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Status: {{ k.status }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

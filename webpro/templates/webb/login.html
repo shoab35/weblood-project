@@ -1,24 +1,32 @@
 {% extends "webb/base.html" %}
+{% load static %}
 {% block body_block %}
-    <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Please Login</h1>
 
-  </div>
-</div>
-    <div class="container-fluid">
-    <form action="{% url 'user_login' %}" method="post">
-          {% csrf_token %}
-  <div class="form-group">
-    <label for="username">Username: </label>
-    <input type="text" class="form-control" id="formGroupExampleInput" name="username" placeholder="Enter Username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password: </label>
-    <input type="text" class="form-control" id="formGroupExampleInput2" name="password" placeholder="Enter password">
-  </div>
-  <input type="submit" name="" value="Login">
-</form>
+<div class="container signin-container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-sm-12 col-md-8">
+            <div class="card signin-card">
+                <div class="card-block">
+                    <div class="jumbotron jumbotron-fluid loginJumbo">
+                        <h1 class="display-4 loginHead">Please Login</h1>
+                    </div>
+                    <img src="" class="img-fluid signin-img">
+                    <form class="signin-form" action="{% url 'user_login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn signin-btn btn-lg" value="Login">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
     </div>
+</div>
 
 {% endblock %}

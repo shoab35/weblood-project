@@ -1,27 +1,62 @@
 {% extends "webb/base.html" %}
+{% load static %}
+{% load staticfiles %}
 {% block body_block %}
-    <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Your Profile</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4 uNameProfile">{{ user.username }}</h1>
 
-  </div>
-    <div class="uprofile">
-        <img src="{{ user.userprofileinfo.profile_pic.url }}" class="rounded mx-auto d-block" alt="profile pic">
-        <table>
-            
-            <tr>
-                <td>
-                    <p>Username: {{ user.username }}</p></br>
-                    <p>Email: {{ user.email }}</p></br>
-                    <p>Age: {{ user.userprofileinfo.age }}</p></br>
-                    <p>Weight: {{ user.userprofileinfo.weight }}</p></br>
-                    <p>Blood Group: {{ user.userprofileinfo.blood_group }}</p></br>
-                    <p>Distict: {{ user.userprofileinfo.District }}</p></br>
-                    <p>Phone number: {{ user.userprofileinfo.phone_number }}</p>
-                </td>
-            </tr>
-        </table>
-        <a class="btn btn-primary" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
+    </div>
+    <div class="container uprofile">
+        <img src="{{ user.userprofileinfo.profile_pic.url }}" class="rounded mx-auto d-block col-sm-12 col-md-4 userProfilePic" alt="profile pic">
+        <div class="container">
+            <div class="upTable">
+                <table>
+                    <tr>
+                        <td class="tlabel">Username: </td>
+                        <td class="tData">{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Email: </td>
+                        <td class="tData">{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Firstname: </td>
+                        <td class="tData">{{ user.userprofileinfo.First_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Lastname: </td>
+                        <td class="tData">{{ user.userprofileinfo.Last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Age: </td>
+                        <td class="tData">{{ user.userprofileinfo.age }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Weight: </td>
+                        <td class="tData">{{ user.userprofileinfo.weight }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Blood Group: </td>
+                        <td class="tData">{{ user.userprofileinfo.blood_group }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">District: </td>
+                        <td class="tData">{{ user.userprofileinfo.District }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Phone Number: </td>
+                        <td class="tData">{{ user.userprofileinfo.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tlabel">Status: </td>
+                        <td class="tData">{{ user.userprofileinfo.status }}</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <a class="btn btn-primary col-sm-10 col-md-2 profileEditBtn" href="{% url 'edit_profile' %}" role="button">Edit Profile</a>
     </div>
 </div>
 

@@ -1,22 +1,19 @@
 {% extends "webb/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
 {% block body_block %}
-    <div class="container">
-    <h1>Testing</h1>
-    <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ user.email }}">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ user.email }}">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-    </div>
+<div class="container col-sm-12 col-md-4 regForm">
+    <h1>{{ user.username }}</h1>
+    <form enctype="multipart/form-data" method="POST">
+        <div class="form-group">
+            {% csrf_token %}
+            <img src="{{ user.userprofileinfo.profile_pic.url }}" class="rounded mx-auto d-block col-sm-12 col-md-4 userProfilePic" alt="profile pic">
+            {{ user_update_form|crispy }}
+            {{ profile_update_form|crispy }}
+        </div>
+        <button class="btn btn-primary col-sm-10 col-md-2 profileEditBtn" type="submit">Update</button>
+</div>
+<h1> </h1><br>
 
 {% endblock %}

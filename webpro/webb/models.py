@@ -16,7 +16,7 @@ class UserProfileInfo(models.Model):
     weight = models.IntegerField(blank=False)
 
     bg = [
-        ('a+', 'A+'), ('a-',  'A-'), ('b+',  'B+'), ('b-',  'B-'), ('ab+',  'AB+'), ('ab-',  'AB-'), ('o+',  'O+'), ('o-',  'O-')
+        ('A+', 'A+'), ('A-',  'A-'), ('B+',  'B+'), ('B-',  'B-'), ('AB+',  'AB+'), ('AB-',  'AB-'), ('O+',  'O+'), ('O-',  'O-')
     ]
 
     blood_group = models.CharField(max_length=10, choices=bg, blank=False)
@@ -24,11 +24,21 @@ class UserProfileInfo(models.Model):
     phone_number = models.IntegerField(blank=False)
 
     bd = [
-        ('syllhet', 'Syllhet'), ('habiganj', 'Habiganj'), ('lalmonirhat', 'Lalmonirhat'), ('rajshahi', 'Rajshahi'), ('pabna', 'Pabna'), ('mymensingh', 'Mymensingh'), ('khulna', 'Khulna'),
-        ('tangail', 'Tangail')
+        ('Syllhet', 'Syllhet'), ('Habiganj', 'Habiganj'), ('Lalmonirhat', 'Lalmonirhat'), ('Rajshahi', 'Rajshahi'), ('Pabna', 'Pabna'), ('Mymensingh', 'Mymensingh'), ('Khulna', 'Khulna'),
+        ('Tangail', 'Tangail')
     ]
 
     District = models.CharField(max_length=50, choices=bd, blank=False)
+
+    stat = [
+        ('Available', 'AVAILABLE'), ('Unavailable', 'UNAVAILABLE')
+    ]
+
+    status = models.CharField(max_length=10, choices=stat, blank=False)
+
+    First_name = models.CharField(max_length=15, blank=False)
+
+    Last_name = models.CharField(max_length=15, blank=False)
 
     def __str__(self):
         return self.user.username

@@ -11,7 +11,20 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 
+class UserFormUpdate(forms.ModelForm):
+    class Meta():
+        model = User
+        fields = ['email']
+
+
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('profile_pic', 'age', 'weight', 'blood_group', 'District', 'phone_number')
+        fields = ('profile_pic', 'First_name', 'Last_name', 'age', 'weight', 'blood_group', 'District', 'phone_number',
+                  'status')
+
+
+class UserProfileInfoFormUpdate(forms.ModelForm):
+    class Meta():
+        model = UserProfileInfo
+        fields = ('profile_pic', 'First_name', 'Last_name', 'age', 'weight', 'District', 'phone_number', 'status')

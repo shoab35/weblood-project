@@ -1,26 +1,29 @@
 {% extends "webb/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% load staticfiles %}
 {% block body_block %}
+{% if registered %}
 <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-
-      {% if registered %}
-        <h1 class="display-4">thank you for registering</h1>
-      {% else %}
-          <h3 class="display-4">Register Here</h3>
-          <h4 class="display-4">Fill out the form</h4>
-
-          <form enctype="multipart/form-data" method="post" >
-          {% csrf_token %}
-          {{ user_form|crispy }}
-          {{ profile_form|crispy }}
-          <input type="submit" name="" value="Register">
-          </form>
-
-
-      {% endif %}
-  </div>
+    <div class="container">
+        <h1 class="display-4 regOk">Thank you for registering</h1>
+    </div>
 </div>
+{% else %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4 regOk">Register here</h1>
+        <h3 class="display-4 regOk">Fill up the form</h3>
+    </div>
+</div>
+<div class="container col-sm-12 col-md-4 regForm">
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <input type="submit" name="" value="Register">
+    </form>
+</div>
+{% endif %}
 
 {% endblock %}
